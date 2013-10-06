@@ -15,6 +15,7 @@ a {
   color: maroon;
   text-decoration: underline;
   font-weight: bold;
+  cursor: pointer;
 }
 h1 {
   color: maroon;
@@ -58,4 +59,8 @@ form label {
   line-height: 25px;
   font-weight: bold;
   color: maroon;
+}
+
+th.active {
+  background: yellow;
 }
