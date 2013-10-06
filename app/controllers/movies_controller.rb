@@ -9,14 +9,14 @@ class MoviesController < ApplicationController
   def index
     sort = params[:sort] || session[:sort]
     @all_ratings = ['G', 'PG', 'PG-13', 'R']
-    @active_ratings = params[:ratings] || session[:ratings] || {}
+    @active_ratings = params[:ratings] || session[:ratings] || {'G'=> 1, 'PG'=> 1, 'PG-13'=> 1, 'R'=> 1}
 
     if sort == 'title'
       sorting = {:order => :title}
-      @title_header_active = 'active'
+      @title_active = 'active'
     elsif sort == 'release_date'
       sorting = {:order => :release_date}
-      @release_date_header_active = 'active'
+      @release_date_active = 'active'
     end
 
     if params[:sort] != session[:sort]
