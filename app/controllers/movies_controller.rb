@@ -8,26 +8,27 @@ class MoviesController < ApplicationController
 
   def index
     sort = params[:sort] || session[:sort]
-    case sort
-      when 'title'
-        ordering, @title_header = {:order => :title}, 'active'
-      when 'release_date'
-        ordering, @release_date_header = {:order => :release_date}, 'active'
-    end
     @all_ratings = ['G', 'PG', 'PG-13', 'R']
-    @selected_ratings = params[:ratings] || session[:ratings] || {}
+    @active_ratings = params[:ratings] || session[:ratings] || {}
+
+    if sort == 'title'
+      sorting = {:order => :title}
+      @title_header_active = 'active'
+    elsif sort == 'release_date'
+      sorting = {:order => :release_date}
+      @release_date_header_active = 'active'
+    end
 
     if params[:sort] != session[:sort]
       session[:sort] = sort
-      redirect_to :sort => sort, :ratings => @selected_ratings and return
+      redirect_to :sort => sort, :ratings => @active_ratings and return
     end
 
-    if params[:ratings] != session[:ratings] and @selected_ratings != {}
-      session[:sort] = sort
-      session[:ratings] = @selected_ratings
-      redirect_to :sort => sort, :ratings => @selected_ratings and return
+    if @active_ratings != {} and params[:ratings] != session[:ratings]
+      session[:ratings] = @active_ratings
+      redirect_to :sort => sort, :ratings => @active_ratings and return
     end
-    @movies = Movie.find_all_by_rating(@selected_ratings.keys, ordering)
+    @movies = Movie.find_all_by_rating(@active_ratings.keys, sorting)
   end
 
   def new
