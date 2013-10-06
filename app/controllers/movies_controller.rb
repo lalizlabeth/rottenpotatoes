@@ -13,10 +13,10 @@ class MoviesController < ApplicationController
 
     if sort == 'title'
       sorting = {:order => :title}
-      @title_active = 'active'
+      @title_active = 'hilite'
     elsif sort == 'release_date'
       sorting = {:order => :release_date}
-      @release_date_active = 'active'
+      @release_date_active = 'hilite'
     end
 
     if params[:sort] != session[:sort]

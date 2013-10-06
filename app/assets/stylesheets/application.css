@@ -61,6 +61,6 @@ form label {
   color: maroon;
 }
 
-table#movies th.active {
+table#movies th.hilite {
   background: yellow;
 }
