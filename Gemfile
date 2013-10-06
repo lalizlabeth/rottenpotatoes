@@ -28,3 +28,4 @@ gem 'jquery-rails'
 # To use debugger
 gem 'ruby-debug19', :require => 'ruby-debug'
 gem 'haml'
+gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
